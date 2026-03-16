@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package datastucturesca.objects;
+package datastructuresca.objects;
 import java.util.Date;
 /**
  *
- * @author DELL
+ * @author Alex
  */
 public class Issue extends Item {
     public Issue() {
@@ -16,7 +16,7 @@ public class Issue extends Item {
         urgency = 0;
     }
     
-    protected Issue(String title, String description, Date dateAdded, int urgency) {
+    public Issue(String title, String description, Date dateAdded, int urgency) {
         this.title = title;
         this.description = description;
         this.dateAdded = dateAdded;

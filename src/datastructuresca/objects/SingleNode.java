@@ -2,27 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package datastucturesca.objects;
+package datastructuresca.objects;
 
 /**
  *
- * @author DELL
+ * @author Alex
  */
-public class SinglyNode<T> {
+public class SingleNode<T> {
     private T data;
-    SinglyNode<T> nextNode;
+    SingleNode<T> nextNode;
     
     
-    public SinglyNode(T data, SinglyNode nextNode) {
+    public SingleNode(T data, SingleNode nextNode) {
          this.data = data;
          this.nextNode = nextNode;
     };
     
-    public SinglyNode getNext() {
+    public SingleNode getNext() {
         return nextNode;
     }
     
-    public void setNext(SinglyNode nextNode) {
+    public void setNext(SingleNode nextNode) {
         this.nextNode = nextNode;
     }
     
