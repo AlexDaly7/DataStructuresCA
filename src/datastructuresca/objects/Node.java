@@ -31,6 +31,10 @@ public class Node {
         this.prevNode = prevNode;
     }
     
+    public Node getPrev() {
+        return prevNode;
+    }
+    
     public void setData(Area data) {
         this.data = data;
     }

@@ -10,18 +10,20 @@ import java.util.Date;
  *
  * @author Alex
  */
-public class Project extends Item {
+public class Project {
+    private String title;
+    private String description;
+    private int urgency;
+    
     public Project() {
         title = new String();
         description = new String();
-        dateAdded = new Date();
         urgency = 0;
     }
     
     public Project(String title, String description, Date dateAdded, int urgency) {
         this.title = title;
         this.description = description;
-        this.dateAdded = dateAdded;
         this.urgency = urgency;
     }
 }

@@ -4,20 +4,16 @@
  */
 package datastructuresca.interfaces;
 
-import datastructuresca.objects.Project;
-import datastructuresca.objects.SingleNode;
-
 /**
  *
  * @author Alex
  */
 
-public interface SingleLinkedInterface {
-    public void add(Project data);
-    public void add(Project data, int position);
-    public SingleNode get(int position);
+public interface LinearListInterface<T> {
+    public void add(T data);
     public void remove();
     public int size();
+    public T getCurrent();
     public boolean isEmpty();
 }
 

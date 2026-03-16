@@ -11,19 +11,16 @@ import java.util.Date;
 public class Item {
     protected String title;
     protected String description;
-    protected Date dateAdded;
     protected int urgency;
     
     protected Item() {
         title = new String();
         description = new String();
-        dateAdded = new Date();
         urgency = 0;
     }
     protected Item(String title, String description, Date dateAdded, int urgency) {
         this.title = title;
         this.description = description;
-        this.dateAdded = dateAdded;
         this.urgency = urgency;
     }
 
@@ -43,11 +40,7 @@ public class Item {
         this.description = description;
     }
 
-    protected Date getDateAdded() {
-        return dateAdded;
-    }
-
-    protected int getUrgency() {
+    public int getUrgency() {
         return urgency;
     }
 
@@ -56,6 +49,6 @@ public class Item {
     }
     
     protected String getDetails() {
-        return "Title: "+title+"\nDescription: "+description+"\nDate Added: "+dateAdded.toString()+"\nUrgency: "+urgency;
+        return "Title: "+title+"\nDescription: "+description+"\nUrgency: "+urgency;
     }
 }

@@ -3,16 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package datastructuresca.interfaces;
-
+import datastructuresca.objects.Item;
 /**
  *
  * @author DELL
  */
-public interface PriorityQueueInterface<T> {
-    public void enqueue(T element);
-    public void dequeue(T element);
-    public T peek();
+public interface PriorityQueueInterface {
+    public void enqueue(Item element);
+    public void dequeue();
+    public Item peek();
+    public int findPosition(int value);
     public int size();
-    public void remove(int position);
+    public void remove(Item item);
     public boolean isEmpty();
 }
