@@ -29,14 +29,20 @@ public class DoublyLinkedList implements LinearListInterface<Area> {
     @Override
     public void add(Area area) { // Add node to list
         Node newNode = new Node(area, null, null);
+        System.out.print(newNode.getData().getTitle());
         if(size==0) {
-            head = newNode; // If list is empty, new node becomes both head and last.
-            last = newNode;
+            head = newNode; // If list is empty, new node becomes head.
+        } else if (size==1) {
+            head.setNext(newNode); // If list only has head, new node becomes head and head becomes last.
+            newNode.setPrev(head);
+            last = head;
+            head = newNode;
         } else {
-            newNode.setPrev(head); // If list is not empty, insert new node into head.
+            newNode.setPrev(head); // If list has head and last, insert new node into head.
             head.setNext(newNode);
             head = newNode;
         }
+        System.out.println("Size: "+size);
         size++; // Increase size
     }
     
@@ -61,9 +67,31 @@ public class DoublyLinkedList implements LinearListInterface<Area> {
         size--; // Decrease size
     }
     
+    public void updateCurrent(String title, String desc) {
+        Area area = current.getData();
+        area.setTitle(title);
+        area.setDescription(desc);
+    }
+    
+    public void setCurrentHead() {
+        current = head;
+    }
+    
+    public void getNext() {
+        current = current.getNext();
+    }
+    
+    public void getPrev() {
+        current = current.getPrev();
+    }
+    
     @Override
-    public Area getCurrent() { // Returns current nodes data
+    public Area getCurrentData() { // Returns current nodes data
         return current.getData();
+    }
+    
+    public Node getCurrent() {
+        return current;
     }
     
     @Override
@@ -74,5 +102,12 @@ public class DoublyLinkedList implements LinearListInterface<Area> {
     @Override
     public boolean isEmpty() { // Is list empty
         return (size==0);
+    }
+    
+    public void printList() {
+        for (Node tempNode = head; tempNode != null; tempNode = tempNode.getNext()) {
+            String oneItem = (tempNode.getData().getTitle());
+            System.out.println(oneItem);
+        }
     }
 }

@@ -4,6 +4,8 @@
  */
 package datastructuresca;
 
+import datastructuresca.structures.DoublyLinkedList;
+import datastructuresca.objects.Area;
 /**
  *
  * @author Alex
@@ -11,12 +13,17 @@ package datastructuresca;
 public class MainGUI extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainGUI.class.getName());
-
+    private DoublyLinkedList doublyList = new DoublyLinkedList();
+    private Area currentArea;
     /**
      * Creates new form MainGUI
      */
     public MainGUI() {
         initComponents();
+        if(!doublyList.isEmpty()) {
+            currentArea = doublyList.getCurrentData();  
+        }
+       
     }
 
     /**
@@ -28,21 +35,247 @@ public class MainGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        nextAreaBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        areaTitle = new javax.swing.JLabel();
+        prevAreaBtn = new javax.swing.JButton();
+        addAreaBtn = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        areaTitleInput = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        areaDescInput = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        areaDesc = new javax.swing.JLabel();
+        areaIssuesBtn1 = new javax.swing.JButton();
+        addAreaOutput = new javax.swing.JLabel();
+        removeAreaBtn = new javax.swing.JButton();
+        updateAreaBtn = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(550, 400));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setText("Biodiversity Issue Tracker");
+
+        nextAreaBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        nextAreaBtn.setText("Next area");
+        nextAreaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextAreaBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Current area:");
+
+        areaTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        prevAreaBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        prevAreaBtn.setText("Previous area");
+        prevAreaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prevAreaBtnActionPerformed(evt);
+            }
+        });
+
+        addAreaBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addAreaBtn.setText("Add area");
+        addAreaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAreaBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setText("Area title:");
+
+        areaTitleInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setText("Area description:");
+
+        areaDescInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        areaDescInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                areaDescInputActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setText("Description");
+
+        areaDesc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        areaIssuesBtn1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        areaIssuesBtn1.setText("Open areas issues");
+        areaIssuesBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                areaIssuesBtn1ActionPerformed(evt);
+            }
+        });
+
+        addAreaOutput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        removeAreaBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        removeAreaBtn.setText("Remove area");
+        removeAreaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeAreaBtnActionPerformed(evt);
+            }
+        });
+
+        updateAreaBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        updateAreaBtn.setText("Update Area");
+        updateAreaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateAreaBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(areaTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel6)
+                            .addComponent(areaDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(areaIssuesBtn1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nextAreaBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(prevAreaBtn))
+                            .addComponent(removeAreaBtn))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel4)
+                                        .addComponent(areaTitleInput, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                                        .addComponent(areaDescInput))
+                                    .addComponent(addAreaOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(addAreaBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(updateAreaBtn)))))
+                .addContainerGap(480, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(areaTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(areaDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(33, 33, 33)
+                                        .addComponent(areaTitleInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(areaDescInput, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(areaIssuesBtn1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nextAreaBtn)
+                            .addComponent(prevAreaBtn)
+                            .addComponent(addAreaBtn)
+                            .addComponent(updateAreaBtn))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addAreaOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(removeAreaBtn))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nextAreaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextAreaBtnActionPerformed
+        if(doublyList.getCurrent().getNext()!=null&&doublyList.getCurrent()!=null) { //  Check if next or current is null
+            doublyList.getNext(); // Get next node and render to GUI
+            currentArea = doublyList.getCurrentData();
+            renderArea(); 
+        }
+        
+    }//GEN-LAST:event_nextAreaBtnActionPerformed
+
+    private void prevAreaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevAreaBtnActionPerformed
+        if(doublyList.getCurrent().getPrev()!=null&&doublyList.getCurrent()!=null) { // Check if previous or current is null
+            doublyList.getPrev(); // Get previous node and render to GUI
+            currentArea = doublyList.getCurrentData();
+            renderArea();
+        }
+        
+        
+    }//GEN-LAST:event_prevAreaBtnActionPerformed
+
+    private void addAreaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAreaBtnActionPerformed
+        // Check values and notify user if fields unfilled.
+        if(areaTitleInput.getText().length()==0) {
+            addAreaOutput.setText("Please enter a title.");
+        } else if(areaDescInput.getText().length()==0) {
+            addAreaOutput.setText("Please enter a description.");
+        } else {
+           // Add area to list and render, wipe error message
+            Area area = new Area(areaTitleInput.getText(),areaDescInput.getText(), 0);
+            doublyList.add(area); 
+            doublyList.setCurrentHead(); // Since everything is added to head, go to head.
+            currentArea = doublyList.getCurrentData();
+            renderArea();
+            addAreaOutput.setText("");
+        }
+    }//GEN-LAST:event_addAreaBtnActionPerformed
+
+    private void areaDescInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaDescInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_areaDescInputActionPerformed
+
+    private void areaIssuesBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaIssuesBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_areaIssuesBtn1ActionPerformed
+
+    private void removeAreaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAreaBtnActionPerformed
+        doublyList.remove();
+        currentArea = doublyList.getCurrentData();
+        renderArea();
+    }//GEN-LAST:event_removeAreaBtnActionPerformed
+
+    private void updateAreaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAreaBtnActionPerformed
+        doublyList.updateCurrent(areaTitleInput.getText(), areaDescInput.getText());
+        currentArea = doublyList.getCurrentData();
+        renderArea();
+    }//GEN-LAST:event_updateAreaBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -68,7 +301,28 @@ public class MainGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainGUI().setVisible(true));
     }
+    
+    public void renderArea() {
+        areaTitle.setText(currentArea.getTitle());
+        areaDesc.setText(currentArea.getDescription());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addAreaBtn;
+    private javax.swing.JLabel addAreaOutput;
+    private javax.swing.JLabel areaDesc;
+    private javax.swing.JTextField areaDescInput;
+    private javax.swing.JButton areaIssuesBtn1;
+    private javax.swing.JLabel areaTitle;
+    private javax.swing.JTextField areaTitleInput;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton nextAreaBtn;
+    private javax.swing.JButton prevAreaBtn;
+    private javax.swing.JButton removeAreaBtn;
+    private javax.swing.JButton updateAreaBtn;
     // End of variables declaration//GEN-END:variables
 }

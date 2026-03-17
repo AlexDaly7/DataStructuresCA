@@ -13,7 +13,7 @@ public interface LinearListInterface<T> {
     public void add(T data);
     public void remove();
     public int size();
-    public T getCurrent();
+    public T getCurrentData();
     public boolean isEmpty();
 }
 

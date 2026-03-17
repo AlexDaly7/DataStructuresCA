@@ -8,13 +8,15 @@ package datastructuresca;
  *
  * @author Alex
  */
-public class DataStucturesCA {
+public class DataStructuresCA {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        MainGUI mainGUI = new MainGUI();
+        mainGUI.setVisible(true);
+    
     }
     
 }

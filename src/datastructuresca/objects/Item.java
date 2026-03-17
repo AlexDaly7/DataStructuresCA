@@ -24,19 +24,19 @@ public class Item {
         this.urgency = urgency;
     }
 
-    protected String getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    protected void setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    protected String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    protected void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -44,11 +44,11 @@ public class Item {
         return urgency;
     }
 
-    protected void setUrgency(int urgency) {
+    public void setUrgency(int urgency) {
         this.urgency = urgency;
     }
     
-    protected String getDetails() {
+    public String getDetails() {
         return "Title: "+title+"\nDescription: "+description+"\nUrgency: "+urgency;
     }
 }
