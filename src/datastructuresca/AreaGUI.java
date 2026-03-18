@@ -313,11 +313,8 @@ public class AreaGUI extends javax.swing.JFrame {
     }   
             
     private void openAreaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openAreaBtnActionPerformed
-        areaGUI.setVisible(false);
-        
-        
+        areaGUI.setVisible(false);     
         MainGUI.reappear();
-        
     }//GEN-LAST:event_openAreaBtnActionPerformed
 
     private void updateIssueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateIssueBtnActionPerformed

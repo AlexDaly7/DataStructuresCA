@@ -106,10 +106,12 @@ public class DoublyLinkedList implements LinearListInterface<Area> {
         return (size==0);
     }
     
-    public void printList() {
-        for (Node tempNode = head; tempNode != null; tempNode = tempNode.getNext()) {
-            String oneItem = (tempNode.getData().getTitle());
-            System.out.println(oneItem);
+    public void calcTrueUrgency() {
+        setCurrentHead();
+        while(current.getNext()!=null) {
+            current.getData().calcTrueUrgency();
+            System.out.println("TrueURgency: "+current.getData().getTrueUrgency());
+            getNext();
         }
     }
 }

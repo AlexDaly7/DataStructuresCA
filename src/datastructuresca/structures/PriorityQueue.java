@@ -23,7 +23,7 @@ public class PriorityQueue implements PriorityQueueInterface{
         if(priorityQ.isEmpty()) {
             priorityQ.add(element);
         } else {
-            priorityQ.add(findPosition(element.getUrgency()), element); // Add element to queue at position determined by findPosition()
+            priorityQ.add(findPosition(element.getTrueUrgency()), element); // Add element to queue at position determined by findPosition()
         }
     }
     
@@ -36,13 +36,13 @@ public class PriorityQueue implements PriorityQueueInterface{
     
     @Override
     public int findPosition(int value) {
-        if(priorityQ.isEmpty()||priorityQ.get(0).getUrgency()<value) { // If first element is less than value, return first position
+        if(priorityQ.isEmpty()||priorityQ.get(0).getTrueUrgency()<value) { // If first element is less than value, return first position
             return 0;
         }
-        int lastValue = priorityQ.get(0).getUrgency();
+        int lastValue = priorityQ.get(0).getTrueUrgency();
         for(int i=0;i<=priorityQ.size()-1;i++) {
             
-            if(lastValue>=value&&priorityQ.get(i).getUrgency()<=value) { // If urgency of item fits between last and current list entries urgencies.
+            if(lastValue>=value&&priorityQ.get(i).getTrueUrgency()<=value) { // If urgency of item fits between last and current list entries urgencies.
                 return i; // Return this spot of the next Item
             }
             lastValue = priorityQ.get(i).getUrgency();
@@ -84,7 +84,8 @@ public class PriorityQueue implements PriorityQueueInterface{
     public int getTotalUrgency() {
         int urgency = 0;
         for(Item issue : priorityQ) {
-            urgency += issue.getUrgency();
+            issue.calcTrueUrgency();
+            urgency += issue.getTrueUrgency();
         }
         return urgency;
     }

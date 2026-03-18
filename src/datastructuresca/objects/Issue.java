@@ -29,6 +29,7 @@ public class Issue extends Item {
         trueUrgency = 0;
     }
     
+    @Override
     public void calcTrueUrgency() { // Issue urgency is its urgency minus urgency relieved from completed projects.
         int projectsUrgency = 0;
         singleList.setCurrentHead();
@@ -45,7 +46,8 @@ public class Issue extends Item {
     
     @Override
     public int getTrueUrgency() {
-        return getTrueUrgency();
+        calcTrueUrgency();
+        return trueUrgency;
     }
     
     @Override

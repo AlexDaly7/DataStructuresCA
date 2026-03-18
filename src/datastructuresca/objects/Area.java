@@ -37,18 +37,19 @@ public class Area extends Item {
     }
     
     @Override
+    public void calcTrueUrgency() {
+        trueUrgency = pQueue.getTotalUrgency();
+    }
+    
+    @Override
     public int getTrueUrgency() {
-        int issueUrgency = 0;
-        return pQueue.getTotalUrgency();
+        calcTrueUrgency();
+        return trueUrgency;    
     }
     
     @Override
     public int getUrgency() {
         return urgency;
-    }
-    
-    public void calcUrgency() {
-        
     }
     
     public Issue peek() {

@@ -40,6 +40,10 @@ public class Item {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+    public void calcTrueUrgency() {
+        // Overwritten by objects that extend Item
+    }
 
     public int getUrgency() {
         return urgency;

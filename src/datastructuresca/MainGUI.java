@@ -351,7 +351,9 @@ public class MainGUI extends javax.swing.JFrame {
     }
     
     public static void reappear() {
+        mainGUI.doublyList.calcTrueUrgency();
         mainGUI.setVisible(true);
+        mainGUI.renderArea();
     }
     
     public void renderArea() {
