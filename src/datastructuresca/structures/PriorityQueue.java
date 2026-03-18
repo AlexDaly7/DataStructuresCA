@@ -20,41 +20,53 @@ public class PriorityQueue implements PriorityQueueInterface{
     
     @Override
     public void enqueue(Item element) {
-        priorityQ.add(findPosition(element.getUrgency()), element); // Add element to queue at position determined by findPosition()
+        if(priorityQ.isEmpty()) {
+            priorityQ.add(element);
+        } else {
+            priorityQ.add(findPosition(element.getUrgency()), element); // Add element to queue at position determined by findPosition()
+        }
     }
     
     @Override
     public void dequeue() { // Removes first item in the list.
-        priorityQ.removeFirst();
+        if(!priorityQ.isEmpty()) {
+            priorityQ.removeFirst();
+        }
     }
     
     @Override
     public int findPosition(int value) {
-        if(priorityQ.get(0).getUrgency()<value) {
+        if(priorityQ.isEmpty()||priorityQ.get(0).getUrgency()<value) { // If first element is less than value, return first position
             return 0;
         }
-        for(int i=0;i<priorityQ.size();i++) {
+        int lastValue = priorityQ.get(0).getUrgency();
+        for(int i=0;i<=priorityQ.size()-1;i++) {
             
-            if(priorityQ.get(i).getUrgency()>=value) { // If urgency of Item at i is above or equal to
-                if(priorityQ.get(i+1).getUrgency()<=value) { // If urgency of Item at i+1 is below or equal to
-                    return i+1; // Return this spot of the next Item
-                }
+            if(lastValue>=value&&priorityQ.get(i).getUrgency()<=value) { // If urgency of item fits between last and current list entries urgencies.
+                return i; // Return this spot of the next Item
             }
+            lastValue = priorityQ.get(i).getUrgency();
         }
         // If there is no spot in the middle or top to put it into.
         // Put it at the end
-        return priorityQ.size()+1;
+        return priorityQ.size();
     }
     
     @Override
-    public void remove(Item item) { // Remove item from the queue
-        priorityQ.remove(item);
+    public void remove() { // Remove item from the queue
+        priorityQ.remove(0);
     }
     
     
     @Override
     public Item peek() { // Return first element
-        return priorityQ.getFirst();
+        return priorityQ.get(0);
+    }
+    
+    @Override
+    public void update(Item element) {
+        dequeue();
+        enqueue(element);
     }
     
     @Override

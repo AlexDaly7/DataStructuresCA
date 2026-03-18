@@ -14,9 +14,8 @@ public class DataStructuresCA {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        MainGUI mainGUI = new MainGUI();
-        mainGUI.setVisible(true);
-    
+        MainGUI.main(args);
+        
     }
     
 }

@@ -12,8 +12,9 @@ public interface PriorityQueueInterface {
     public void enqueue(Item element);
     public void dequeue();
     public Item peek();
+    public void update(Item element);
     public int findPosition(int value);
     public int size();
-    public void remove(Item item);
+    public void remove();
     public boolean isEmpty();
 }

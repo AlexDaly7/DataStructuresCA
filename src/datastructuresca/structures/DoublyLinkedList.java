@@ -68,7 +68,7 @@ public class DoublyLinkedList implements LinearListInterface<Area> {
     }
     
     public void updateCurrent(String title, String desc) {
-        Area area = current.getData();
+        Area area = current.getData(); // Update current area title and description
         area.setTitle(title);
         area.setDescription(desc);
     }

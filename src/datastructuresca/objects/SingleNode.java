@@ -8,14 +8,14 @@ package datastructuresca.objects;
  *
  * @author Alex
  */
-public class SingleNode<T> {
-    private T data;
-    SingleNode<T> nextNode;
+public class SingleNode {
+    private Project data;
+    SingleNode nextNode;
     
     
-    public SingleNode(T data, SingleNode nextNode) {
+    public SingleNode(Project data) {
          this.data = data;
-         this.nextNode = nextNode;
+         this.nextNode = null;
     };
     
     public SingleNode getNext() {
@@ -26,11 +26,11 @@ public class SingleNode<T> {
         this.nextNode = nextNode;
     }
     
-    public T getData() {
+    public Project getData() {
         return data;
     }
     
-    public void setData(T data) {
+    public void setData(Project data) {
         this.data = data;
     }
 }

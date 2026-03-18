@@ -5,23 +5,25 @@
 package datastructuresca;
 
 import datastructuresca.structures.DoublyLinkedList;
+import datastructuresca.structures.PriorityQueue;
 import datastructuresca.objects.Area;
 /**
  *
  * @author Alex
  */
 public class MainGUI extends javax.swing.JFrame {
-    
+    private static MainGUI mainGUI;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainGUI.class.getName());
-    private DoublyLinkedList doublyList = new DoublyLinkedList();
-    private Area currentArea;
+    private DoublyLinkedList doublyList = new DoublyLinkedList(); // Create doublylinkedlist
+    private PriorityQueue pQueue = new PriorityQueue();
+    private Area currentArea; // Hold the current area
     /**
      * Creates new form MainGUI
      */
     public MainGUI() {
-        initComponents();
+        initComponents(); // TODO, load stored values
         if(!doublyList.isEmpty()) {
-            currentArea = doublyList.getCurrentData();  
+            currentArea = doublyList.getCurrentData();
         }
        
     }
@@ -47,13 +49,18 @@ public class MainGUI extends javax.swing.JFrame {
         areaDescInput = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         areaDesc = new javax.swing.JLabel();
-        areaIssuesBtn1 = new javax.swing.JButton();
+        areaIssuesBtn = new javax.swing.JButton();
         addAreaOutput = new javax.swing.JLabel();
         removeAreaBtn = new javax.swing.JButton();
         updateAreaBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(550, 400));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setText("Biodiversity Issue Tracker");
@@ -107,11 +114,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         areaDesc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        areaIssuesBtn1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        areaIssuesBtn1.setText("Open areas issues");
-        areaIssuesBtn1.addActionListener(new java.awt.event.ActionListener() {
+        areaIssuesBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        areaIssuesBtn.setText("Open areas issues");
+        areaIssuesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                areaIssuesBtn1ActionPerformed(evt);
+                areaIssuesBtnActionPerformed(evt);
             }
         });
 
@@ -151,7 +158,7 @@ public class MainGUI extends javax.swing.JFrame {
                                 .addComponent(areaTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel6)
                             .addComponent(areaDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(areaIssuesBtn1)
+                            .addComponent(areaIssuesBtn)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(nextAreaBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -172,7 +179,7 @@ public class MainGUI extends javax.swing.JFrame {
                                 .addComponent(addAreaBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(updateAreaBtn)))))
-                .addContainerGap(480, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,9 +189,9 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(areaTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(areaTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -202,7 +209,7 @@ public class MainGUI extends javax.swing.JFrame {
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(areaDescInput, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(areaIssuesBtn1))
+                            .addComponent(areaIssuesBtn))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nextAreaBtn)
@@ -215,7 +222,8 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(addAreaOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(removeAreaBtn))))
+                        .addComponent(removeAreaBtn)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
@@ -261,12 +269,15 @@ public class MainGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_areaDescInputActionPerformed
 
-    private void areaIssuesBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaIssuesBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_areaIssuesBtn1ActionPerformed
+    private void areaIssuesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaIssuesBtnActionPerformed
+        if(currentArea!=null) { // If area isnt null, open areaGUI and close mainGUI
+           AreaGUI.main(currentArea);
+           mainGUI.setVisible(false); 
+        }
+    }//GEN-LAST:event_areaIssuesBtnActionPerformed
 
     private void removeAreaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAreaBtnActionPerformed
-        doublyList.remove();
+        doublyList.remove(); // Remove current area and switch to another area
         currentArea = doublyList.getCurrentData();
         renderArea();
     }//GEN-LAST:event_removeAreaBtnActionPerformed
@@ -276,6 +287,10 @@ public class MainGUI extends javax.swing.JFrame {
         currentArea = doublyList.getCurrentData();
         renderArea();
     }//GEN-LAST:event_updateAreaBtnActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -299,10 +314,22 @@ public class MainGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MainGUI().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            mainGUI = new MainGUI();
+            mainGUI.setVisible(true);
+        });
+        
+    }
+    
+    public static void reappear() {
+        mainGUI.setVisible(true);
     }
     
     public void renderArea() {
+        if(doublyList.isEmpty()) {
+            areaTitle.setText("");
+            areaDesc.setText("");
+        }
         areaTitle.setText(currentArea.getTitle());
         areaDesc.setText(currentArea.getDescription());
     }
@@ -312,7 +339,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel addAreaOutput;
     private javax.swing.JLabel areaDesc;
     private javax.swing.JTextField areaDescInput;
-    private javax.swing.JButton areaIssuesBtn1;
+    private javax.swing.JButton areaIssuesBtn;
     private javax.swing.JLabel areaTitle;
     private javax.swing.JTextField areaTitleInput;
     private javax.swing.JLabel jLabel1;
