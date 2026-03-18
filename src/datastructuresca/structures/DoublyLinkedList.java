@@ -42,13 +42,14 @@ public class DoublyLinkedList implements LinearListInterface<Area> {
             head.setNext(newNode);
             head = newNode;
         }
-        System.out.println("Size: "+size);
         size++; // Increase size
     }
     
     @Override
     public void remove() { // Delete current node
-        if(size==0) {} else if (size==1) { // If size 0 do nothing
+        if(size==0) {
+            return;
+        } else if (size==1) { 
             head = null; // If size is 1 then there is only one node, reset list.
             last = null;
         } else {
@@ -67,7 +68,7 @@ public class DoublyLinkedList implements LinearListInterface<Area> {
         size--; // Decrease size
     }
     
-    public void updateCurrent(String title, String desc) {
+    public void update(String title, String desc) {
         Area area = current.getData(); // Update current area title and description
         area.setTitle(title);
         area.setDescription(desc);
@@ -77,6 +78,7 @@ public class DoublyLinkedList implements LinearListInterface<Area> {
         current = head;
     }
     
+    @Override
     public void getNext() {
         current = current.getNext();
     }

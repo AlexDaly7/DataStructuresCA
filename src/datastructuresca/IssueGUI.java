@@ -4,6 +4,9 @@
  */
 package datastructuresca;
 
+import datastructuresca.objects.Issue;
+import datastructuresca.objects.Project;
+
 /**
  *
  * @author DELL
@@ -11,12 +14,19 @@ package datastructuresca;
 public class IssueGUI extends javax.swing.JFrame {
     private static IssueGUI issueGUI;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(IssueGUI.class.getName());
-
+    private Project currentProject;
+    private Issue issue;
     /**
      * Creates new form IssueGUI
      */
-    public IssueGUI() {
+    public IssueGUI(Issue issue) {
         initComponents();
+        this.issue = issue;
+        if(!issue.isEmpty()) {
+            currentProject = issue.getCurrentData();
+            renderProject();
+            issueTitle.setText(issue.getTitle());
+        }
     }
 
     /**
@@ -29,11 +39,113 @@ public class IssueGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         openIssueBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        projectTitleInput = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        projectUrgencyInput = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        projectDescInput = new javax.swing.JTextArea();
+        addProjectBtn = new javax.swing.JButton();
+        updateProjectBtn = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        projectTitle = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        projectUrgency = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        projectDesc = new javax.swing.JTextArea();
+        jLabel8 = new javax.swing.JLabel();
+        issueTitle = new javax.swing.JLabel();
+        projectDone = new javax.swing.JCheckBox();
+        projectOutput = new javax.swing.JLabel();
+        nextProjectBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(550, 400));
 
         openIssueBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         openIssueBtn.setText("Go back?");
+        openIssueBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openIssueBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Title:");
+
+        projectTitleInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setText("Urgency Relieved");
+
+        projectUrgencyInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("Desc:");
+
+        projectDescInput.setColumns(20);
+        projectDescInput.setRows(5);
+        jScrollPane1.setViewportView(projectDescInput);
+
+        addProjectBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addProjectBtn.setText("Add issue");
+        addProjectBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProjectBtnActionPerformed(evt);
+            }
+        });
+
+        updateProjectBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        updateProjectBtn.setText("Update issue");
+        updateProjectBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateProjectBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setText("Project:");
+
+        projectTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setText("Urgency Relieved:");
+
+        projectUrgency.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setText("Description:");
+
+        projectDesc.setEditable(false);
+        projectDesc.setColumns(20);
+        projectDesc.setRows(5);
+        jScrollPane2.setViewportView(projectDesc);
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setText("Issue:");
+
+        issueTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        projectDone.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        projectDone.setText("Project done?");
+        projectDone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                projectDoneActionPerformed(evt);
+            }
+        });
+
+        projectOutput.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        projectOutput.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+
+        nextProjectBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        nextProjectBtn.setText("Next project");
+        nextProjectBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextProjectBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -41,24 +153,185 @@ public class IssueGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(openIssueBtn)
-                .addContainerGap(290, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(projectOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(openIssueBtn)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(projectDone))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(projectTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(projectUrgency, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(issueTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nextProjectBtn))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2)
+                                    .addComponent(projectTitleInput, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(40, 40, 40))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(updateProjectBtn)
+                                    .addComponent(addProjectBtn))
+                                .addGap(90, 90, 90))
+                            .addComponent(projectUrgencyInput, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 123, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(openIssueBtn)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(openIssueBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(issueTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nextProjectBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(projectTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(projectUrgency, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(projectDone))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(projectTitleInput, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(projectUrgencyInput, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addProjectBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(updateProjectBtn)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(projectOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addProjectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProjectBtnActionPerformed
+        String title = projectTitleInput.getText();
+        String description = projectDescInput.getText();
+        String urgencyStr = projectUrgencyInput.getText();
+        int urgency = validateInputs(); // Validate inputs
+        if(urgency==0) { // Return if problem
+            return;
+        }
+
+        Project project = new Project(title, description, urgency); // Create issue
+        projectOutput.setText(""); // Wipe error
+        issue.add(project); // Add and render issue
+        renderProject();
+    }//GEN-LAST:event_addProjectBtnActionPerformed
+
+    private void updateProjectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateProjectBtnActionPerformed
+        int urgency = validateInputs(); // Validate inputs
+        if(urgency==0) { // Return if problem
+            return;
+        }
+        issue.update(new Project(projectTitleInput.getText(),projectDescInput.getText(), urgency));
+        renderProject();
+    }//GEN-LAST:event_updateProjectBtnActionPerformed
+
+    private void projectDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectDoneActionPerformed
+        if(currentProject!=null) {
+            currentProject.setDone(!currentProject.isDone());
+            issue.update(currentProject);
+            System.out.print(currentProject.isDone());
+        }
+    }//GEN-LAST:event_projectDoneActionPerformed
+
+    private void nextProjectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextProjectBtnActionPerformed
+        issue.getNext();
+        renderProject();
+    }//GEN-LAST:event_nextProjectBtnActionPerformed
+
+    private void openIssueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openIssueBtnActionPerformed
+        
+        AreaGUI.reappear();
+        issueGUI.setVisible(false);
+    }//GEN-LAST:event_openIssueBtnActionPerformed
+    
+    private void renderProject() {
+        currentProject = issue.getCurrentData();
+        projectTitle.setText(currentProject.getTitle());
+        projectDesc.setText(currentProject.getDescription());
+        projectUrgency.setText(String.valueOf(currentProject.getUrgency()));
+        projectDone.setSelected(currentProject.isDone());
+    }
+    
+    private int validateInputs() {
+        String title = projectTitleInput.getText();
+        String description = projectDescInput.getText();
+        String urgencyStr = projectUrgencyInput.getText();
+        int urgency;
+        if(urgencyStr.length()==0) {
+            projectOutput.setText("Please enter a number for urgency");
+            return 0;
+        } 
+        if(title.length()==0||title.length()>30) {
+            projectOutput.setText("Title must be between 1 and 30 characters");
+            return 0;
+        }
+        try {
+            urgency = Integer.parseInt(urgencyStr);
+        } catch(NumberFormatException e) {
+            projectOutput.setText("Urgency must be a number");
+            return 0;
+        }
+        if (urgency>100||urgency<=0) {
+            projectOutput.setText("Urgency must be between 1 and 100");
+            return 0;
+        }
+        if(description.length()==0||description.length()>400) {
+            projectOutput.setText("Desc must be between 1 and 400 characters");
+            return 0;
+        }
+        return urgency;
+    }   
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(Issue issue) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -78,12 +351,33 @@ public class IssueGUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            issueGUI = new IssueGUI();
+            issueGUI = new IssueGUI(issue);
             issueGUI.setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addProjectBtn;
+    private javax.swing.JLabel issueTitle;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton nextProjectBtn;
     private javax.swing.JButton openIssueBtn;
+    private javax.swing.JTextArea projectDesc;
+    private javax.swing.JTextArea projectDescInput;
+    private javax.swing.JCheckBox projectDone;
+    private javax.swing.JLabel projectOutput;
+    private javax.swing.JLabel projectTitle;
+    private javax.swing.JTextField projectTitleInput;
+    private javax.swing.JLabel projectUrgency;
+    private javax.swing.JTextField projectUrgencyInput;
+    private javax.swing.JButton updateProjectBtn;
     // End of variables declaration//GEN-END:variables
 }

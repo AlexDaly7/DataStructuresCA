@@ -21,7 +21,10 @@ public class AreaGUI extends javax.swing.JFrame {
     public AreaGUI(Area area) {
         initComponents();
         this.area = area;
-        areaTitle.setText(area.getTitle());
+        if(!area.isEmpty()) {
+            renderIssue();
+            areaTitle.setText(area.getTitle());
+        }
     }
 
     /**
@@ -54,6 +57,8 @@ public class AreaGUI extends javax.swing.JFrame {
         openAreaBtn = new javax.swing.JButton();
         updateIssueBtn = new javax.swing.JButton();
         removeIssueBtn = new javax.swing.JButton();
+        issueOutput1 = new javax.swing.JLabel();
+        openIssue = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(550, 400));
@@ -133,6 +138,17 @@ public class AreaGUI extends javax.swing.JFrame {
             }
         });
 
+        issueOutput1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        issueOutput1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+
+        openIssue.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        openIssue.setText("Open issue");
+        openIssue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openIssueActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,27 +160,32 @@ public class AreaGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(openAreaBtn)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(openAreaBtn)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(openIssue))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(areaTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
                                             .addComponent(jLabel4)
-                                            .addComponent(issueUrgencyInput, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel2)
-                                            .addComponent(issueTitleInput, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(issueTitleInput, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(issueUrgencyInput, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                         .addGap(40, 40, 40))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(updateIssueBtn)
-                                            .addComponent(addIssueBtn))
-                                        .addGap(90, 90, 90))))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(updateIssueBtn)
+                                    .addComponent(addIssueBtn))
+                                .addGap(90, 90, 90))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
@@ -177,13 +198,18 @@ public class AreaGUI extends javax.swing.JFrame {
                                         .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(issueUrgency, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(46, 46, 46))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(removeIssueBtn)
                         .addGap(26, 26, 26)
                         .addComponent(issueOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(26, Short.MAX_VALUE))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(183, Short.MAX_VALUE)
+                    .addComponent(issueOutput1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(16, 16, 16)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +217,9 @@ public class AreaGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(openAreaBtn)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(openAreaBtn)
+                            .addComponent(openIssue))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -229,6 +257,11 @@ public class AreaGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(issueOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(322, Short.MAX_VALUE)
+                    .addComponent(issueOutput1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
         pack();
@@ -281,7 +314,10 @@ public class AreaGUI extends javax.swing.JFrame {
             
     private void openAreaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openAreaBtnActionPerformed
         areaGUI.setVisible(false);
+        
+        
         MainGUI.reappear();
+        
     }//GEN-LAST:event_openAreaBtnActionPerformed
 
     private void updateIssueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateIssueBtnActionPerformed
@@ -297,14 +333,21 @@ public class AreaGUI extends javax.swing.JFrame {
         area.remove();
         renderIssue();
     }//GEN-LAST:event_removeIssueBtnActionPerformed
+
+    private void openIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openIssueActionPerformed
+        if(currentIssue!=null) {
+            areaGUI.setVisible(false);
+            IssueGUI.main(currentIssue);  
+        }
+    }//GEN-LAST:event_openIssueActionPerformed
     
     public void renderIssue() {
         currentIssue = area.peek();
         issueTitle.setText(currentIssue.getTitle());
         issueDesc.setText(currentIssue.getDescription());
-        issueUrgency.setText(String.valueOf(currentIssue.getUrgency()));
+        issueUrgency.setText(String.valueOf(currentIssue.getTrueUrgency()));
     }
-    /**
+    /*
      * @param args the command line arguments
      */
     public static void main(Area area) {
@@ -329,8 +372,14 @@ public class AreaGUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> {
             areaGUI = new AreaGUI(area);
             areaGUI.setVisible(true);
+            areaGUI.renderIssue();
         });
         
+    }
+    
+    public static void reappear() {
+        areaGUI.setVisible(true);
+        areaGUI.renderIssue();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -339,6 +388,7 @@ public class AreaGUI extends javax.swing.JFrame {
     private javax.swing.JTextArea issueDesc;
     private javax.swing.JTextArea issueDescInput;
     private javax.swing.JLabel issueOutput;
+    private javax.swing.JLabel issueOutput1;
     private javax.swing.JLabel issueTitle;
     private javax.swing.JTextField issueTitleInput;
     private javax.swing.JLabel issueUrgency;
@@ -353,6 +403,7 @@ public class AreaGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton openAreaBtn;
+    private javax.swing.JButton openIssue;
     private javax.swing.JButton removeIssueBtn;
     private javax.swing.JButton updateIssueBtn;
     // End of variables declaration//GEN-END:variables

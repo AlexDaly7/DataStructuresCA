@@ -15,5 +15,6 @@ public interface LinearListInterface<T> {
     public int size();
     public T getCurrentData();
     public boolean isEmpty();
+    public void getNext();
 }
 

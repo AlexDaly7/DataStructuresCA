@@ -14,34 +14,37 @@ import datastructuresca.objects.Project;
 public class SinglyLinkedList  implements LinearListInterface<Project> {
     private SingleNode head;
     private SingleNode current;
+    private SingleNode previous;
     private int size;
     
     public SinglyLinkedList() {
         head = null;
         current = head;
+        previous = head;
         size = 0;
     }
     
     @Override
-    public void add(Project project) {
+    public void add(Project project) { 
         SingleNode newNode = new SingleNode(project);
         if(size==0) {
             head = newNode;
-        } else {
+        } else { 
             newNode.setNext(head);
             head = newNode;
         }
         size++;
+        current = head;
     }
     
     @Override
     public void remove() {
-        SingleNode toRemove = current; // Save current node
-        currentToHead(); // Go to head
-        while(current.getNext()!=toRemove) { // While current.getNext() does not equal toRemove get next
-           current = current.getNext();
+        setCurrentHead();
+        if(size<=1) {
+            head = null;
+        } else {
+            previous.setNext(current.getNext());
         }
-        current.setNext(current.getNext().getNext()); // Set current's next to 2 nodes ahead, skipping the target node and dereferencing it
         size--;
     }
     
@@ -52,7 +55,26 @@ public class SinglyLinkedList  implements LinearListInterface<Project> {
     
     @Override 
     public Project getCurrentData() {
-        return current.getData();
+        if(current!=null) {
+            return current.getData();
+        } else {
+            return new Project();
+        }
+    }
+    
+    public SingleNode getCurrent() {
+        return current;
+    }
+    
+    @Override
+    public void getNext() {
+        if(current.getNext()!=null) {
+            previous = current;
+            current = current.getNext();
+        } else {
+            previous = current;
+            current = head;
+        }
     }
     
     @Override
@@ -60,7 +82,10 @@ public class SinglyLinkedList  implements LinearListInterface<Project> {
         return size==0;
     }
     
-    public void currentToHead() {
+    public void update(Project project) {
+        current.setData(project);
+    }
+    public void setCurrentHead() {
         current = head;
     }
 }

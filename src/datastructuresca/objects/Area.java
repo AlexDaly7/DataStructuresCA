@@ -17,12 +17,14 @@ public class Area extends Item {
         description = new String();
         urgency = 0;
         pQueue = new PriorityQueue();
+        trueUrgency = 0;
     }
     
     public Area(String title, String description, int urgency) {
         this.title = title;
         this.description = description;
         this.urgency = urgency;
+        this.trueUrgency = urgency;
         pQueue = new PriorityQueue();
     }
     
@@ -32,6 +34,21 @@ public class Area extends Item {
     
     public void remove() {
         pQueue.remove();
+    }
+    
+    @Override
+    public int getTrueUrgency() {
+        int issueUrgency = 0;
+        return pQueue.getTotalUrgency();
+    }
+    
+    @Override
+    public int getUrgency() {
+        return urgency;
+    }
+    
+    public void calcUrgency() {
+        
     }
     
     public Issue peek() {

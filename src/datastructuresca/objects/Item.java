@@ -12,6 +12,7 @@ public class Item {
     protected String title;
     protected String description;
     protected int urgency;
+    protected int trueUrgency;
     
     protected Item() {
         title = new String();
@@ -41,6 +42,10 @@ public class Item {
     }
 
     public int getUrgency() {
+        return urgency;
+    }
+    
+    public int getTrueUrgency() {
         return urgency;
     }
 

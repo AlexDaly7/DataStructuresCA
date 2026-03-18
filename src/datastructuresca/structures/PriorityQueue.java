@@ -65,8 +65,10 @@ public class PriorityQueue implements PriorityQueueInterface{
     
     @Override
     public void update(Item element) {
-        dequeue();
-        enqueue(element);
+        Item current = priorityQ.get(0);
+        current.setTitle(element.getTitle());
+        current.setDescription(element.getDescription());
+        current.setUrgency(element.getTrueUrgency());
     }
     
     @Override
@@ -77,5 +79,13 @@ public class PriorityQueue implements PriorityQueueInterface{
     @Override
     public boolean isEmpty() { // Is queue empty
         return priorityQ.isEmpty();
+    }
+    
+    public int getTotalUrgency() {
+        int urgency = 0;
+        for(Item issue : priorityQ) {
+            urgency += issue.getUrgency();
+        }
+        return urgency;
     }
 }
