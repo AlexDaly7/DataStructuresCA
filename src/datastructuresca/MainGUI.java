@@ -200,17 +200,16 @@ public class MainGUI extends javax.swing.JFrame {
                                     .addComponent(areaTitleInput)
                                     .addComponent(areaDescInput, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(highUrgency)
-                                .addGap(26, 26, 26)
-                                .addComponent(addAreaOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(addAreaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(updateAreaBtn))))
+                                .addComponent(updateAreaBtn))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(addAreaOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(highUrgency))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(216, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,12 +254,13 @@ public class MainGUI extends javax.swing.JFrame {
                             .addComponent(prevAreaBtn))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addAreaOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(removeAreaBtn)
                         .addComponent(areaIssuesBtn))
                     .addComponent(highUrgency))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addAreaOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         pack();
@@ -350,10 +350,10 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_highUrgencyActionPerformed
     
     public boolean validateInputs() { // Validate title and description
-        if(areaTitleInput.getText().length()==0&&areaTitleInput.getText().length()>30) {
+        if(areaTitleInput.getText().length()<=0||areaTitleInput.getText().length()>30) {
             addAreaOutput.setText("Please enter a title.");
             return false;
-        } else if(areaDescInput.getText().length()==0&&areaDescInput.getText().length()>400) {
+        } else if(areaDescInput.getText().length()<=0||areaDescInput.getText().length()>400) {
             addAreaOutput.setText("Please enter a description.");
             return false;
         }
