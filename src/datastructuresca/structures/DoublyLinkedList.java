@@ -29,7 +29,6 @@ public class DoublyLinkedList implements LinearListInterface<Area> {
     @Override
     public void add(Area area) { // Add node to list
         Node newNode = new Node(area, null, null);
-        System.out.print(newNode.getData().getTitle());
         if(size==0) {
             head = newNode; // If list is empty, new node becomes head.
         } else if (size==1) {
@@ -56,9 +55,11 @@ public class DoublyLinkedList implements LinearListInterface<Area> {
             if(head==current) { // If the current node is the head, set the node before head to the head and make its next null.
                 head = head.getPrev();
                 head.setNext(null);
+                current = head;
             } else if (last==current) { // If the current node is the last, set the node after last to the last and make its prev null.
                 last = last.getNext();
                 last.setPrev(null);
+                current = last;
             } else { // If the current node is in the middle, change node after and before current to refer to eachother and set current node to its next.
                 current.getNext().setPrev(current.getPrev());
                 current.getPrev().setNext(current.getNext());
@@ -80,11 +81,15 @@ public class DoublyLinkedList implements LinearListInterface<Area> {
     
     @Override
     public void getNext() {
-        current = current.getNext();
+        if(current.getNext()!=null) {
+           current = current.getNext(); 
+        }
     }
     
     public void getPrev() {
-        current = current.getPrev();
+        if(current.getPrev()!=null) {
+           current = current.getPrev(); 
+        }
     }
     
     @Override
@@ -94,6 +99,10 @@ public class DoublyLinkedList implements LinearListInterface<Area> {
     
     public Node getCurrent() {
         return current;
+    }
+    
+    public Node getLast() {
+        return last;
     }
     
     @Override

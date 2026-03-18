@@ -29,8 +29,9 @@ public class SinglyLinkedList  implements LinearListInterface<Project> {
         SingleNode newNode = new SingleNode(project);
         if(size==0) {
             head = newNode;
-        } else { 
+        } else {
             newNode.setNext(head);
+            previous = head;
             head = newNode;
         }
         size++;
@@ -42,8 +43,12 @@ public class SinglyLinkedList  implements LinearListInterface<Project> {
         setCurrentHead();
         if(size<=1) {
             head = null;
+            current = head;
+        } else if (previous==null) {
+            current = current.getNext();
         } else {
             previous.setNext(current.getNext());
+            current = current.getNext();
         }
         size--;
     }

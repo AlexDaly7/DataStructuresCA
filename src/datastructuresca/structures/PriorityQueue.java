@@ -57,6 +57,9 @@ public class PriorityQueue implements PriorityQueueInterface{
         priorityQ.remove(0);
     }
     
+    public void remove(Item item) {
+        priorityQ.remove(item);
+    }
     
     @Override
     public Item peek() { // Return first element
@@ -69,6 +72,19 @@ public class PriorityQueue implements PriorityQueueInterface{
         current.setTitle(element.getTitle());
         current.setDescription(element.getDescription());
         current.setUrgency(element.getTrueUrgency());
+    }
+    
+    @Override
+    public void update(String title, String desc, int urgencyin) {
+        int i = -1;
+        int urgency;
+        do { // Go through list until element with same urgency is found.
+            i++;
+            urgency = priorityQ.get(i).getUrgency();
+        } while (urgency!=urgencyin);
+        Item item = priorityQ.get(i);
+        item.setTitle(title);
+        item.setDescription(desc);
     }
     
     @Override

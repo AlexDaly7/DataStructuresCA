@@ -13,6 +13,7 @@ public interface PriorityQueueInterface {
     public void dequeue();
     public Item peek();
     public void update(Item element);
+    public void update(String title, String desc, int urgency);
     public int findPosition(int value);
     public int size();
     public void remove();

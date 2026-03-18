@@ -281,37 +281,7 @@ public class AreaGUI extends javax.swing.JFrame {
         area.add(issue); // Add and render issue
         renderIssue();
     }//GEN-LAST:event_addIssueBtnActionPerformed
-
-    private int validateInputs() {
-        String title = issueTitleInput.getText();
-        String description = issueDescInput.getText();
-        String urgencyStr = issueUrgencyInput.getText();
-        int urgency;
-        if(urgencyStr.length()==0) {
-            issueOutput.setText("Please enter a number for urgency");
-            return 0;
-        } 
-        if(title.length()==0||title.length()>30) {
-            issueOutput.setText("Title must be between 1 and 30 characters");
-            return 0;
-        }
-        try {
-            urgency = Integer.parseInt(urgencyStr);
-        } catch(NumberFormatException e) {
-            issueOutput.setText("Urgency must be a number");
-            return 0;
-        }
-        if (urgency>100||urgency<=0) {
-            issueOutput.setText("Urgency must be between 1 and 100");
-            return 0;
-        }
-        if(description.length()==0||description.length()>400) {
-            issueOutput.setText("Desc must be between 1 and 400 characters");
-            return 0;
-        }
-        return urgency;
-    }   
-            
+               
     private void openAreaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openAreaBtnActionPerformed
         areaGUI.setVisible(false);     
         MainGUI.reappear();
@@ -377,6 +347,36 @@ public class AreaGUI extends javax.swing.JFrame {
     public static void reappear() {
         areaGUI.setVisible(true);
         areaGUI.renderIssue();
+    }
+    
+    private int validateInputs() {
+        String title = issueTitleInput.getText();
+        String description = issueDescInput.getText();
+        String urgencyStr = issueUrgencyInput.getText();
+        int urgency;
+        if(urgencyStr.length()==0) {
+            issueOutput.setText("Please enter a number for urgency");
+            return 0;
+        } 
+        if(title.length()==0||title.length()>30) {
+            issueOutput.setText("Title must be between 1 and 30 characters");
+            return 0;
+        }
+        try {
+            urgency = Integer.parseInt(urgencyStr);
+        } catch(NumberFormatException e) {
+            issueOutput.setText("Urgency must be a number");
+            return 0;
+        }
+        if (urgency>100||urgency<=0) {
+            issueOutput.setText("Urgency must be between 1 and 100");
+            return 0;
+        }
+        if(description.length()==0||description.length()>400) {
+            issueOutput.setText("Desc must be between 1 and 400 characters");
+            return 0;
+        }
+        return urgency;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
